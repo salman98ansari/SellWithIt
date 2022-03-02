@@ -8,39 +8,27 @@ import {
   TouchableOpacity,
   Button,
   Alert,
+  Platform,
+  Dimensions,
 } from "react-native";
 
+import {
+  useDimensions,
+  useDeviceOrientation,
+} from "@react-native-community/hooks";
+
 export default function App() {
+  const { landscape } = useDeviceOrientation();
+  const { height, width } = useDimensions();
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Hello React Native</Text>
-      <TouchableOpacity
-        onPress={() => {
-          Alert.alert("Button Press", "My Message", [
-            {
-              text: "yes",
-              onPress: () => {
-                console.log("yes");
-              },
-            },
-            {
-              text: "no",
-              onPress: () => {
-                console.log("no");
-              },
-            },
-          ]);
+      <View
+        style={{
+          backgroundColor: "dodgerblue",
+          width: "100%",
+          height: landscape ? "100%" : "40%",
         }}
-      >
-        <Image
-          source={{
-            uri: "https://picsum.photos/200/300",
-            width: 200,
-            height: 300,
-          }}
-        />
-      </TouchableOpacity>
-      <Button title="Button" />
+      ></View>
     </SafeAreaView>
   );
 }
@@ -49,7 +37,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
   },
 });
