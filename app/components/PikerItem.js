@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import AppText from "./AppText/AppText";
 
-const PikerItem = ({ label, onPress }) => {
+const PikerItem = ({ item, label, onPress }) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <AppText style={styles.text}>{label}</AppText>
