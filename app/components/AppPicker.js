@@ -25,6 +25,7 @@ const AppPicker = ({
   width = "100%",
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
@@ -93,6 +94,7 @@ const styles = StyleSheet.create({
   },
   text: {
     flex: 1,
+    color: colors.black,
   },
   placeholder: {
     color: colors.medium,
