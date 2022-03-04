@@ -1,4 +1,4 @@
-import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,59 +10,39 @@ import {
   Alert,
   Platform,
   Dimensions,
+  TextInput,
 } from "react-native";
 import {
   useDimensions,
   useDeviceOrientation,
 } from "@react-native-community/hooks";
 
-import WelcomeScreen from "./app/screens/WelcomeScreen";
-import ViewImageScreen from "./app/screens/ViewImageScreen";
-import AppText from "./app/components/AppText/AppText";
-import AppButton from "./app/components/AppButton";
-import Card from "./app/components/Card";
-import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
-import MessagesScreen from "./app/screens/MessagesScreen";
 import Screen from "./app/components/Screen";
-import Icon from "./app/components/Icon";
-import ListItem from "./app/components/ListItem";
-import AccountScreen from "./app/screens/AccountScreen";
+import AppTextInput from "./app/components/AppTextInput";
 import ListingScreen from "./app/screens/ListingScreen";
+import AppPicker from "./app/components/AppPicker";
+
+const categories = [
+  { label: "Furniture", value: 1 },
+  { label: "Clothing", value: 2 },
+  { label: "Cameras", value: 3 },
+];
 
 export default function App() {
+  const [category, setCategory] = useState(categories[0]);
   const { landscape } = useDeviceOrientation();
   const { height, width } = useDimensions();
   return (
-    // <View
-    //   style={{
-    //     backgroundColor: "#f8f4f4",
-    //     padding: 20,
-    //     paddingTop: 100,
-    //   }}
-    // >
-    //   <Card
-    //     title="Red Jacket for Sale"
-    //     subtitle="$ 100"
-    //     image={require("./app/assets/jacket.jpg")}
-    //   />
-    // </View>
-    // <Screen>
-    //   <ListItem
-    //     title="Mytitle"
-    //     subtitle="my Subtitle"
-    //     ImageComponent={
-    //       <Icon
-    //         name="email"
-    //         size={40}
-    //         backgroundColor="red"
-    //         iconColor="white"
-    //       />
-    //     }
-    //   />
-    //   {/* <Icon name="email" size={100} backgroundColor="red" iconColor="white" /> */}
-    // </Screen>
-
-    <ListingScreen />
+    <Screen>
+      <AppPicker
+        selectedItem={category}
+        onSelectItem={(item) => setCategory(item)}
+        items={categories}
+        placeholder="Category"
+        icon="apps"
+      />
+      <AppTextInput placeholder="Enter Email" icon="email" />
+    </Screen>
   );
 }
 
