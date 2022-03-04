@@ -21,6 +21,7 @@ import Screen from "./app/components/Screen";
 import AppTextInput from "./app/components/AppTextInput";
 import ListingScreen from "./app/screens/ListingScreen";
 import AppPicker from "./app/components/AppPicker";
+import LoginScreen from "./app/screens/LoginScreen";
 
 const categories = [
   { label: "Furniture", value: 1 },
@@ -43,6 +44,7 @@ export default function App() {
       />
       <AppTextInput placeholder="Enter Email" icon="email" />
     </Screen>
+    // <LoginScreen />
   );
 }
 
