@@ -23,6 +23,8 @@ import ListingScreen from "./app/screens/ListingScreen";
 import AppPicker from "./app/components/AppPicker";
 import LoginScreen from "./app/screens/LoginScreen";
 import ListingEditScreen from "./app/screens/ListingEditScreen";
+import MessagesScreen from "./app/screens/MessagesScreen";
+import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
 
 const categories = [
   { label: "Furniture", value: 1 },
@@ -35,17 +37,17 @@ export default function App() {
   const { landscape } = useDeviceOrientation();
   const { height, width } = useDimensions();
   return (
-    <Screen>
-      <AppPicker
-        selectedItem={category}
-        onSelectItem={(item) => setCategory(item)}
-        items={categories}
-        placeholder="Category"
-        icon="apps"
-      />
-      <AppTextInput placeholder="Enter Email" icon="email" />
-    </Screen>
-    // <ListingEditScreen />
+    // <Screen>
+    //   <AppPicker
+    //     selectedItem={category}
+    //     onSelectItem={(item) => setCategory(item)}
+    //     items={categories}
+    //     placeholder="Category"
+    //     icon="apps"
+    //   />
+    //   <AppTextInput placeholder="Enter Email" icon="email" />
+    // </Screen>
+    <ListingEditScreen />
   );
 }
 
