@@ -1,78 +1,70 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  Image,
-  TouchableOpacity,
-  Button,
-  Alert,
-  Platform,
-  Dimensions,
-  TextInput,
-} from "react-native";
-import {
-  useDimensions,
-  useDeviceOrientation,
-} from "@react-native-community/hooks";
-import * as ImagePicker from "expo-image-picker";
+import { StyleSheet, Text } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import Screen from "./app/components/Screen";
-import AppTextInput from "./app/components/AppTextInput";
-import ListingScreen from "./app/screens/ListingScreen";
-import AppPicker from "./app/components/AppPicker";
-import LoginScreen from "./app/screens/LoginScreen";
-import ListingEditScreen from "./app/screens/ListingEditScreen";
-import MessagesScreen from "./app/screens/MessagesScreen";
-import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
-import ImageInput from "./app/components/ImageInput";
-import ImageInputList from "./app/components/ImageInputList";
-import { BackHandler } from "react-native-web";
+import AuthNavigator from "./app/navigation/AuthNavigator";
+import naigationTheme from "./app/navigation/naigationTheme";
+import AppNavigator from "./app/navigation/AppNavigator";
 
-const categories = [
-  { label: "Furniture", value: 1 },
-  { label: "Clothing", value: 2 },
-  { label: "Cameras", value: 3 },
-];
+const Tweets = () => (
+  <Screen>
+    <Text>Tweets</Text>
+  </Screen>
+);
 
+const Tweetsss = () => (
+  <Screen>
+    <Text>Tweetsss</Text>
+  </Screen>
+);
+
+const Stack = createStackNavigator();
+const StackNavigator = () => (
+  <Stack.Navigator
+    screenOptions={{
+      // headerShown: false,
+      headerStyle: { backgroundColor: "tomato" },
+      headerTintColor: "white",
+    }}
+  >
+    <Stack.Screen name="Tweets" component={Tweets} />
+    <Stack.Screen name="Details" component={Tweetsss} />
+  </Stack.Navigator>
+);
+
+const Tab = createBottomTabNavigator();
+const TabNavigator = () => (
+  <Tab.Navigator
+    tabBarOptions={{
+      activeBackgroundColor: "tomato",
+      activeTintColor: "white",
+      inactiveBackgroundColor: "#eee",
+      inactiveTintColor: "black",
+    }}
+  >
+    <Tab.Screen
+      name="Feed"
+      component={Tweets}
+      options={{
+        tabBarIcon: ({ size, color }) => (
+          <MaterialCommunityIcons name="home" size={size} color={color} />
+        ),
+      }}
+    />
+    <Tab.Screen name="Account" component={Tweetsss} />
+  </Tab.Navigator>
+);
 export default function App() {
-  const [category, setCategory] = useState(categories[0]);
-  const { landscape } = useDeviceOrientation();
-  const { height, width } = useDimensions();
-  const [imageuris, setImageuris] = useState([]);
-
-  const handleAdd = (uri) => {
-    setImageuris([...imageuris, uri]);
-  };
-
-  const handleRemove = (uri) => {
-    setImageuris(imageuris.filter((imageUri) => imageUri !== uri));
-  };
-
   return (
-    // <Screen>
-    //   <AppPicker
-    //     selectedItem={category}
-    //     onSelectItem={(item) => setCategory(item)}
-    //     items={categories}
-    //     placeholder="Category"
-    //     icon="apps"
-    //   />
-    //   <AppTextInput placeholder="Enter Email" icon="email" />
-    // </Screen>
-
-    // <Screen>
-    //   <Text>Salman</Text>
-
-    //   <ImageInputList
-    //     imageUris={imageuris}
-    //     // onChangeImage={(uri) => setImageuri(uri)}
-    //     onAddImage={(uri) => handleAdd(uri)}
-    //     onRemoveImage={handleRemove}
-    //   />
-    // </Screen>
-    <ListingEditScreen />
+    <NavigationContainer theme={naigationTheme}>
+      {/* <AuthNavigator /> */}
+      <AppNavigator />
+    </NavigationContainer>
   );
 }
 
