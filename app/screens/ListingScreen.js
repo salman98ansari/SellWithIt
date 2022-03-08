@@ -1,28 +1,52 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import Card from "../components/Card";
 import Screen from "../components/Screen";
 import colors from "../config/colors";
 import routes from "../navigation/routes";
+import AppButton from "../components/AppButton";
 
-const listing = [
-  {
-    id: 1,
-    title: "Red Jacket For Sale",
-    price: "$100",
-    image: require("../assets/jacket.jpg"),
-  },
-  {
-    id: 2,
-    title: "Couch in great Condition",
-    price: "$1000",
-    image: require("../assets/couch.jpg"),
-  },
-];
+import listingApi from "../api/listing";
+import AppText from "../components/AppText/AppText";
+import ActivityIndicator from "../components/ActivityIndicator";
+import useApi from "../hooks/useApi";
+
+// const listing = [
+//   {
+//     id: 1,
+//     title: "Red Jacket For Sale",
+//     price: "$100",
+//     image: require("../assets/jacket.jpg"),
+//   },
+//   {
+//     id: 2,
+//     title: "Couch in great Condition",
+//     price: "$1000",
+//     image: require("../assets/couch.jpg"),
+//   },
+// ];
 
 const ListingScreen = ({ navigation }) => {
+  const {
+    data: listing,
+    error,
+    loading,
+    request: loadListings,
+  } = useApi(listingApi.getListings);
+
+  useEffect(() => {
+    loadListings();
+  }, []);
+
   return (
     <Screen style={styles.screen}>
+      {error && (
+        <>
+          <AppText>Could't Retrive The listings</AppText>
+          <AppButton title="Retry" onPress={() => loadListings()} />
+        </>
+      )}
+      <ActivityIndicator visible={loading} />
       <FlatList
         showsVerticalScrollIndicator={false}
         data={listing}
@@ -31,7 +55,7 @@ const ListingScreen = ({ navigation }) => {
           <Card
             title={item.title}
             subtitle={item.price}
-            image={item.image}
+            imageUrl={item.images[0].url}
             onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
           />
         )}
