@@ -18,8 +18,8 @@ export default function App() {
     <>
       <OfflineNotice />
       <NavigationContainer theme={naigationTheme}>
-        {/* <AuthNavigator /> */}
-        <AppNavigator />
+        <AuthNavigator />
+        {/* <AppNavigator /> */}
       </NavigationContainer>
     </>
   );
