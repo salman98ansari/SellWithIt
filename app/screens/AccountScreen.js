@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import AuthContext from "../auth/context";
-import authStorage from "../auth/storage";
+
+import useAuth from "../auth/useAuth";
 import Icon from "../components/Icon";
 import ListItem from "../components/ListItem";
 import ListItemSeperator from "../components/ListItemSeperator";
@@ -27,11 +27,12 @@ const menuItems = [
   },
 ];
 const AccountScreen = ({ navigation }) => {
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser, logout } = useAuth();
 
   const handleLogout = () => {
-    setUser(null);
-    authStorage.removeToken();
+    // setUser(null);
+    // authStorage.removeToken();
+    // logout()
   };
 
   return (
@@ -76,7 +77,8 @@ const AccountScreen = ({ navigation }) => {
             />
           }
           onPress={() => {
-            handleLogout();
+            // handleLogout();
+            logout();
           }}
         />
       </View>
